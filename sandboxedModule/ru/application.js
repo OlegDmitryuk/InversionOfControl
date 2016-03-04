@@ -9,3 +9,17 @@ module.exports = function() {
   // Вывод из контекста экспортируемой функции
   console.log('From application exported function');
 };
+
+// Задание 1
+function second_passed() {
+  console.log("прошла секунда")
+}
+setTimeout(second_passed, 1000)
+
+
+function sec() {
+  console.log("прошла секунда")
+}
+setInterval(sec, 1000) // использовать функцию
+
+//Задание 2
