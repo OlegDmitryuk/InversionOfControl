@@ -18,8 +18,7 @@ setTimeout(second_passed, 1000)
 
 
 function sec() {
-  console.log("прошла секунда")
+  	util.log("прошла секунда")
 }
 setInterval(sec, 1000) // использовать функцию
 
-//Задание 2
