@@ -9,11 +9,19 @@ const fs = require('fs');
 const vm = require('vm');
 const util = require('util');
 
+let fileName = './application.js';
+
+const myConsole = {
+  log: (message) => {
+    let date = new Date();
+    console.log(`${fileName} ${date.toUTCString()} ${message}`);
+  }
+};
 
 // Создаем контекст-песочницу, которая станет глобальным контекстом приложения
 const context = {
   module: {},
-  console: console,
+  console: myConsole,
   setTimeout: setTimeout,
   setInterval: setInterval,
   util:util
@@ -23,7 +31,6 @@ context.global = context;
 const sandbox = vm.createContext(context);
 
 // Читаем исходный код пр xиложения из файла
-let fileName = './application.js';
 if (process.argv[2] !== undefined) {
   fileName = process.argv[2];
 }
