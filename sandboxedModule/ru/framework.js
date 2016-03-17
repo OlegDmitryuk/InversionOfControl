@@ -9,12 +9,31 @@ const fs = require('fs');
 const vm = require('vm');
 const util = require('util');
 
+const logFile = 'awesome.log';
 let fileName = './application.js';
+
+function writeFile(message) {
+  fs.appendFile(logFile, `${message}\n`, (err) => {
+    if (err) {
+      return console.log(err);
+    }
+  });
+}
+
+function clearFile() {
+  fs.writeFile(logFile, '', (err) => {
+    if (err) {
+      return console.log(err);
+    }
+  });
+}
 
 const myConsole = {
   log: (message) => {
-    let date = new Date();
-    console.log(`${fileName} ${date.toUTCString()} ${message}`);
+    const date = new Date();
+    const row = `${fileName} ${date.toUTCString()} ${message}`;
+    writeFile(row);
+    console.log(row);
   }
 };
 
@@ -37,9 +56,13 @@ if (process.argv[2] !== undefined) {
 
 fs.readFile(fileName, function(err, src) {
   // Тут нужно обработать ошибки
-if (err) {
-  return console.log(err);
-}
+  if (err) {
+    return console.log(err);
+  }
+
+  //Chistim
+  clearFile();
+
   // Запускаем код приложения в песочнице
   var script = vm.createScript(src, fileName);
   script.runInNewContext(sandbox);
