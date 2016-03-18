@@ -70,6 +70,17 @@ if (process.argv[2] !== undefined) {
   fileName = process.argv[2];
 }
 
+function printFunc(funcParam){
+  const func = funcParam.toString(); 
+  const arrayOfString = func.split('(')[1].split(')')[0].split(',');
+  console.log('Parameters:');
+  arrayOfString.forEach((item) => {
+    item = item.trim();
+    console.log(`${item}`);
+  });
+  console.log(`Counter: ${arrayOfString.length}`);
+}
+
 fs.readFile(fileName, function(err, src) {
   // Тут нужно обработать ошибки
   if (err) {
@@ -86,4 +97,5 @@ fs.readFile(fileName, function(err, src) {
   // Забираем ссылку из sandbox.module.exports, можем ее исполнить,
   // сохранить в кеш, вывести на экран исходный код приложения и т.д.
   printHashFunctions(sandbox.module.exports);
+  printFunc(sandbox.module.exports);
 });

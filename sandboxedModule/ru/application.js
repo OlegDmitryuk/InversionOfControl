@@ -9,14 +9,7 @@ const util = require('util');
 console.log('smtn in console');
 
 
-module.exports = {
-  one: 21341234,
-  two: 'example of string',
-  three: {
-    func: () => {
-      console.log('Stroka');
-    }
-  }
+module.exports = function(pam1, pam2){
+ console.log(`app function`);
 };
-
 
