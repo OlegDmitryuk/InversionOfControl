@@ -7,16 +7,16 @@
 const util = require('util');
 
 console.log('smtn in console');
-//let counter = 0;
 
 
-//setInterval(() => {
-//	console.log(`allahu akbar ${counter}`);
-//	counter++;
-//}, 1000);
-
-// const str = 'Example of str';
-
-// console.log(str);
+module.exports = {
+  one: 21341234,
+  two: 'example of string',
+  three: {
+    func: () => {
+      console.log('Stroka');
+    }
+  }
+};
 
 

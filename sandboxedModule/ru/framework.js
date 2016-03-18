@@ -55,6 +55,16 @@ const context = {
 context.global = context;
 const sandbox = vm.createContext(context);
 
+function printHashFunctions(hash){
+ Object.keys(hash).forEach((item) =>{
+  if(typeof hash[item] === 'object'){
+    printHashFunctions(hash[item]);
+  }else{
+    console.log(`${typeof hash[item]} ${hash[item]}`);
+  }
+ });
+}
+
 // Читаем исходный код пр xиложения из файла
 if (process.argv[2] !== undefined) {
   fileName = process.argv[2];
@@ -75,4 +85,5 @@ fs.readFile(fileName, function(err, src) {
 
   // Забираем ссылку из sandbox.module.exports, можем ее исполнить,
   // сохранить в кеш, вывести на экран исходный код приложения и т.д.
+  printHashFunctions(sandbox.module.exports);
 });
