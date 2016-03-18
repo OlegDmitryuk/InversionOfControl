@@ -43,7 +43,13 @@ const context = {
   console: myConsole,
   setTimeout: setTimeout,
   setInterval: setInterval,
-  util:util
+  util:util,
+  require: (module) => {
+    const date = new Date();
+    const text = '${date.toUTCString()} ${module}\n'
+    writeFile(text);
+    return require(module);
+  }
 };
 
 context.global = context;

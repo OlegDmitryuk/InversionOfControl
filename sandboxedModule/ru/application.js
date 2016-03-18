@@ -4,12 +4,16 @@
 
 'use strict';
 
-let counter = 0;
+const util = require('util');
 
-setInterval(() => {
-	console.log(`allahu akbar ${counter}`);
-	counter++;
-}, 1000);
+console.log('smtn in console');
+//let counter = 0;
+
+
+//setInterval(() => {
+//	console.log(`allahu akbar ${counter}`);
+//	counter++;
+//}, 1000);
 
 // const str = 'Example of str';
 
