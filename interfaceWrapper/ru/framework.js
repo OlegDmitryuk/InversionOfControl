@@ -7,22 +7,8 @@ var fs = require('fs'),
 var context = {
   module: {},
   console: console,
-  // Оборачиваем функцию setTimeout в песочнице
-  setTimeout: function(callback, timeout) {
-    // Добавляем поведение при вызове setTimeout
-    console.log(
-      'Call: setTimeout, ' +
-      'callback function: ' + callback.name + ', ' +
-      'timeout: ' + timeout
-    );
-    setTimeout(function() {
-      // Добавляем поведение при срабатывании таймера
-      console.log('Event: setTimeout, before callback');
-      // Вызываем функцию пользователя на событии таймера
-      callback();
-      console.log('Event: setTimeout, after callback');
-    }, timeout);
-  }
+  // Помещаем ссылку на fs API в песочницу
+  fs: fs
 };
 
 // Преобразовываем хеш в контекст
