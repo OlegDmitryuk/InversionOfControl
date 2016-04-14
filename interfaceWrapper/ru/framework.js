@@ -15,15 +15,15 @@ function cloneInterface(anInterface) {
   return clone;
 }
 
+var readBytes = 0;
 function wrapCallbackFunction(fn){
   return function wrapper(){
     var args = [];
     Array.prototype.push.apply(args, arguments);
-    console.console.log('Callback!');
-    for (var i = 0; i < array.length - 1; ++i) {
-      console.dir(typeof args[i] + ' - ' + args[i]);
+    if (fnName.indexOf('read') > -1) {
+      readBytes += args[1].length;
     }
-    args[i++]();
+    fn.apply(undefined, args);
   }
 }
 
@@ -31,11 +31,9 @@ function wrapFunction(fnName, fn) {
   return function wrapper() {
     var args = [];
     Array.prototype.push.apply(args, arguments);
-    console.log('Call: ' + fnName);
-    console.dir(args);
     var length = args.length;
     if (typeof args[length - 1] == 'function'){
-      args[length - 1] = wrapCallbackFunction(args[length - 1]);
+      args[length - 1] = wrapCallbackFunction(fnName ,args[length - 1]);
     }
     return fn.apply(undefined, args);
   }
@@ -48,10 +46,13 @@ var context = {
     log: wrapFunction('LOG', console.log)
   },
   // Помещаем ссылку на fs API в песочницу
-  fs: cloneInterface(fs)
+  fs: cloneInterface(fs),
+  setInterval: setInterval
 };
 
-
+setInterval(function() {
+  console.log('[Bytes read] ' + readBytes);
+}, 2000);
 
 // Преобразовываем хеш в контекст
 context.global = context;
